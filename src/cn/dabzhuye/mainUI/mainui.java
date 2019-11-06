@@ -246,7 +246,7 @@ class clickAction implements ActionListener{
 			if(intervalSecond.isEmpty() ) {
 				JOptionPane.showMessageDialog(null, "秒钟不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
-			if(Integer.parseInt(intervalSecond) <= 0) {
+			if(Integer.parseInt(intervalSecond) <= 0 && intervalMin.isEmpty() && intervalHour.isEmpty() &&intervalDay.isEmpty() ) {
 				JOptionPane.showMessageDialog(null, "秒钟必须大于0","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setIntervalSecond(intervalSecond);
@@ -370,13 +370,84 @@ class TaskItem implements Runnable{
 		//构建item
 		item = new JPanel(new FlowLayout());
 		item.setPreferredSize(new Dimension(1000,150));
+		item.setName(itemname);
+		JPanel itemedit = new JPanel();
+		JPanel itemchild = new JPanel(new FlowLayout());
+		itemchild.setPreferredSize(new Dimension(1000,100));
 		JPanel itemchild1 = new JPanel();
 		JPanel itemchild2 = new JPanel();
 		
-		item.setName(itemname);
-	
+		
+		//点击设置按钮时显示编辑框，默认隐藏
+		itemedit.setVisible(false);
+		//任务名称
+				JLabel edit_nameLabel = new JLabel("名称");
+				JTextField edit_name = new JTextField();
+				edit_name.setText(this.name);
+				edit_name.setPreferredSize(new Dimension(60,30));
+				itemedit.add(edit_nameLabel);
+				itemedit.add(edit_name);
+				
+				//任务网址
+				JLabel edit_siteLabel = new JLabel("网址");
+				JTextField edit_site = new JTextField();
+				edit_site.setText(this.site);
+				edit_site.setPreferredSize(new Dimension(150,30));
+				itemedit.add(edit_siteLabel);
+				itemedit.add(edit_site);
+				
+				//刷新间隔
+				JLabel edit_intervalRefleshLabel =  new JLabel("刷新间隔");
+				itemedit.add(edit_intervalRefleshLabel);
+				//天
+				
+				JTextField edit_intervalDay =  new JTextField("0");
+				edit_intervalDay.setText(this.intervalDay);
+				edit_intervalDay.setPreferredSize(new Dimension(40,30));
+				JLabel edit_intervalDayLabel =  new JLabel("天");
+				itemedit.add(edit_intervalDayLabel);
+				itemedit.add(edit_intervalDay);
+				
+				//时
+			
+				JTextField edit_intervalHour =  new JTextField("0");
+				edit_intervalHour.setText(this.intervalHour);
+				edit_intervalHour.setPreferredSize(new Dimension(40,30));
+				JLabel edit_intervalHourLabel =  new JLabel("时");
+				itemedit.add(edit_intervalHourLabel);
+				itemedit.add(edit_intervalHour);
+
+				//分
+				JTextField edit_intervalMin =  new JTextField("0");
+				edit_intervalMin.setText(this.intervalMin);
+				edit_intervalMin.setPreferredSize(new Dimension(40,30));
+				JLabel edit_intervalMinLabel =  new JLabel("分");
+				itemedit.add(edit_intervalMinLabel);
+				itemedit.add(edit_intervalMin);
+				
+				//秒
+			
+				JTextField edit_intervalSecond =  new JTextField("0");
+				edit_intervalSecond.setText(this.intervalSecond);
+				edit_intervalSecond.setPreferredSize(new Dimension(40,30));
+				JLabel edit_intervalSecondLabel =  new JLabel("秒");
+				itemedit.add(edit_intervalSecondLabel);
+				itemedit.add(edit_intervalSecond);
+				JButton fanhui = new JButton("返回");
+				fanhui.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						itemedit.setVisible(false);
+						itemchild.setVisible(true);
+					}
+				});
+				itemedit.add(fanhui);
+				
 		
 		
+		//非编辑状态下,itemchild 为显示状态，点击编辑后隐藏
 		itemchild1.setName(itemname1);
 		itemchild1.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -402,10 +473,29 @@ class TaskItem implements Runnable{
 		nextRefleshValue.setName(this.itemnameNextRefleshValue);
 		itemchild1.add(nextRefleshLabel);
 		itemchild1.add(nextRefleshValue);
+		
+		
+		//设置按钮
 		JButton setBtn = new JButton(new ImageIcon("./src/res/icon/set.png")); 
+		setBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//首先停止当前任务
+				if(beginbtn.getName().equals("suspend")) {
+					suspend();
+					beginbtn.setName("begin");
+					beginbtn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+				}
+				//隐藏itemchild
+				itemchild.setVisible(false);
+				//显示编辑  itemedit
+				itemedit.setVisible(true);
+			}
+		});
 		itemchild1.add(setBtn);
 	
-		
 		itemchild2.setName(itemname2);
 		itemchild2.setLayout(new FlowLayout(FlowLayout.CENTER));
 		JLabel nameLabel = new JLabel("网站名称：");
@@ -423,7 +513,8 @@ class TaskItem implements Runnable{
 		//右边两个按钮
 		JPanel rightbtnpanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		rightbtnpanel.setPreferredSize(new Dimension(100,30));
-		JButton detailbtn = new JButton(new ImageIcon("./src/res/icon/pulldown.png"));
+		//下拉按扭
+		JButton detailbtn = new JButton(new ImageIcon("./src/res/icon/pulldown.png"));	
 		detailbtn.setPreferredSize(new Dimension(30,30));
 		detailbtn.addActionListener(new ActionListener() {
 			@Override
@@ -446,6 +537,7 @@ class TaskItem implements Runnable{
 		});
 		rightbtnpanel.add(detailbtn);
 		
+		//单个开始按钮
 		beginbtn = new JButton(new ImageIcon("./src/res/icon/begin.png"));
 		beginbtn.setPreferredSize(new Dimension(30,30));
 		beginbtn.setName("begin");
@@ -471,8 +563,11 @@ class TaskItem implements Runnable{
 		rightbtnpanel.setPreferredSize(new Dimension(100,30));
 		itemchild2.add(rightbtnpanel);
 		
-		item.add(itemchild1);
-		item.add(itemchild2);
+		itemchild.add(itemchild1);
+		itemchild.add(itemchild2);
+		
+		item.add(itemchild);
+		item.add(itemedit);
 		
 		
 		//详细返回信息
