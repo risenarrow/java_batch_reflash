@@ -15,6 +15,8 @@ import java.io.Console;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.lang.model.element.VariableElement;
 import javax.swing.ImageIcon;
@@ -219,14 +221,14 @@ class clickAction implements ActionListener{
 			JTextField intervalDayTF = (JTextField)UiUtil.getCompon(topPanel,"intervalDay" );
 			String intervalDay = intervalDayTF.getText();
 			if(intervalDay.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "天数不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "天数不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setIntervalDay(intervalDay);
 			
 			JTextField intervalHourTF = (JTextField)UiUtil.getCompon(topPanel,"intervalHour" );
 			String intervalHour =  intervalHourTF.getText();
 			if(intervalHour.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "小时不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "小时不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setIntervalHour(intervalHourTF.getText());
 			
@@ -234,7 +236,7 @@ class clickAction implements ActionListener{
 			JTextField intervalMinTF = (JTextField)UiUtil.getCompon(topPanel,"intervalMin" );
 			String intervalMin =  intervalMinTF.getText();
 			if(intervalMin.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "分钟不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "分钟不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setIntervalMin(intervalMinTF.getText());
 			
@@ -242,21 +244,29 @@ class clickAction implements ActionListener{
 			JTextField intervalSecondTF = (JTextField)UiUtil.getCompon(topPanel,"intervalSecond" );
 			String intervalSecond =  intervalSecondTF.getText();
 			if(intervalSecond.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "秒钟不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "秒钟不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
+			}
+			if(Integer.parseInt(intervalSecond) <= 0) {
+				JOptionPane.showMessageDialog(null, "秒钟必须大于0","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setIntervalSecond(intervalSecond);
 			
 			JTextField nameTF = (JTextField)UiUtil.getCompon(topPanel,"name" );
 			String name = nameTF.getText();
 			if(name.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "名称不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "名称不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setName(name);
 			
 			JTextField siteTF = (JTextField)UiUtil.getCompon(topPanel,"site" );
 			String site = siteTF.getText();
 			if(name.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "网址不能为空","错误",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "网址不能为空","错误",JOptionPane.ERROR_MESSAGE);return;
+			}
+			Pattern pattern = Pattern.compile("^(http|https){1}://[\\s\\w\\W]*?");
+			Matcher matcher = pattern.matcher(site);
+			if(!matcher.matches()) {
+				JOptionPane.showMessageDialog(null, "网址格式错误","错误",JOptionPane.ERROR_MESSAGE);return;
 			}
 			itemPanel.setSite(site);
 			
