@@ -55,17 +55,17 @@ class uiclass{
 		ArrayList<TaskItem> arrayList = new ArrayList<TaskItem>();
 		
 		int framewith = 1000;
-		JFrame jFrame = new JFrame("²âÊÔ");
+		JFrame jFrame = new JFrame("æµ‹è¯•");
 		jFrame.setSize(framewith,500);
 		jFrame.setLocation(300, 200);
 
-		//×Üpanel
+		//æ€»panel
 		containerPanel = new JPanel();
 		containerPanel.setLayout(new BorderLayout());
 		containerPanel.setSize(framewith, 500);
 		
 			
-		//¹ö¶¯µÄ panel
+		//æ»šåŠ¨çš„ panel
 		JPanel wai_bao_panel = new JPanel();
 		wai_bao_panel.setPreferredSize(new Dimension(framewith,500));
 		inScrollPanel = new JPanel();
@@ -76,76 +76,76 @@ class uiclass{
 		scrollPane = new JScrollPane(inScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		wai_bao_panel.add(scrollPane);		
 		
-		//Ìí¼Ó°´Å¥ºÍÊäÈë¿ò    µÄpanel
+		//æ·»åŠ æŒ‰é’®å’Œè¾“å…¥æ¡†    çš„panel
 		jPanel3 = new JPanel();
 		jPanel3.setLayout(new FlowLayout());
 		jPanel3.setPreferredSize(new Dimension(framewith,60));
 		
-		//Ìí¼Ó°´Å¥
-		JButton addButton = new JButton("Ôö¼Ó");
+		//æ·»åŠ æŒ‰é’®
+		JButton addButton = new JButton("å¢åŠ ");
 		addButton.setPreferredSize(new Dimension(100,30));
 		addButton.setName("additem");
 		addButton.setIcon(new ImageIcon("./src/res/icon/addicon.png"));
 		addButton.addActionListener(new clickAction(inScrollPanel,arrayList));
 		
-		//ÈÎÎñÃû³Æ
-		JLabel nameLabel = new JLabel("Ãû³Æ");
+		//ä»»åŠ¡åç§°
+		JLabel nameLabel = new JLabel("åç§°");
 		JTextField name = new JTextField();
 		name.setPreferredSize(new Dimension(60,30));
 		name.setName("name");
 		jPanel3.add(nameLabel);
 		jPanel3.add(name);
 		
-		//ÈÎÎñÍøÖ·
-		JLabel siteLabel = new JLabel("ÍøÖ·");
+		//ä»»åŠ¡ç½‘å€
+		JLabel siteLabel = new JLabel("ç½‘å€");
 		JTextField site = new JTextField();
 		site.setName("site");
 		site.setPreferredSize(new Dimension(150,30));
 		jPanel3.add(siteLabel);
 		jPanel3.add(site);
 		
-		//Ë¢ĞÂ¼ä¸ô
-		JLabel intervalRefleshLabel =  new JLabel("Ë¢ĞÂ¼ä¸ô");
+		//åˆ·æ–°é—´éš”
+		JLabel intervalRefleshLabel =  new JLabel("åˆ·æ–°é—´éš”");
 		jPanel3.add(intervalRefleshLabel);
-		//Ìì
+		//å¤©
 		
 		JTextField intervalDay =  new JTextField("0");
 		intervalDay.setName("intervalDay");
 		intervalDay.setPreferredSize(new Dimension(40,30));
-		JLabel intervalDayLabel =  new JLabel("Ìì");
+		JLabel intervalDayLabel =  new JLabel("å¤©");
 		jPanel3.add(intervalDayLabel);
 		jPanel3.add(intervalDay);
 		
-		//Ê±
+		//æ—¶
 	
 		JTextField intervalHour =  new JTextField("0");
 		intervalHour.setName("intervalHour");
 		intervalHour.setPreferredSize(new Dimension(40,30));
-		JLabel intervalHourLabel =  new JLabel("Ê±");
+		JLabel intervalHourLabel =  new JLabel("æ—¶");
 		jPanel3.add(intervalHourLabel);
 		jPanel3.add(intervalHour);
 
-		//·Ö
+		//åˆ†
 		JTextField intervalMin =  new JTextField("0");
 		intervalMin.setName("intervalMin");
 		intervalMin.setPreferredSize(new Dimension(40,30));
-		JLabel intervalMinLabel =  new JLabel("·Ö");
+		JLabel intervalMinLabel =  new JLabel("åˆ†");
 		jPanel3.add(intervalMinLabel);
 		jPanel3.add(intervalMin);
 		
-		//Ãë
+		//ç§’
 	
 		JTextField intervalSecond =  new JTextField("0");
 		intervalSecond.setName("intervalSecond");
 		intervalSecond.setPreferredSize(new Dimension(40,30));
-		JLabel intervalSecondLabel =  new JLabel("Ãë");
+		JLabel intervalSecondLabel =  new JLabel("ç§’");
 		jPanel3.add(intervalSecondLabel);
 		jPanel3.add(intervalSecond);
 		
 		jPanel3.add(addButton);
 		
-		//È«²¿¿ªÊ¼
-		JButton beginAll = new JButton("È«²¿¿ªÊ¼",new ImageIcon("./src/res/icon/begin.png"));
+		//å…¨éƒ¨å¼€å§‹
+		JButton beginAll = new JButton("å…¨éƒ¨å¼€å§‹",new ImageIcon("./src/res/icon/begin.png"));
 		beginAll.setName("beginAll");
 		beginAll.addActionListener(new ActionListener() {
 			@Override
@@ -161,8 +161,8 @@ class uiclass{
 		});
 		jPanel3.add(beginAll);
 		
-		//È«²¿È¡Ïû
-		JButton cancelAll = new JButton("È«²¿ÔİÍ£",new ImageIcon("./src/res/icon/stop.png"));
+		//å…¨éƒ¨å–æ¶ˆ
+		JButton cancelAll = new JButton("å…¨éƒ¨æš‚åœ",new ImageIcon("./src/res/icon/stop.png"));
 		cancelAll.setName("cancelAll");
 		cancelAll.addActionListener(new ActionListener() {
 			
@@ -208,77 +208,55 @@ class clickAction implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		//»ñÈ¡Óë°´Å¥Í¬Ò»²ãµÄ×é¼ş
+		//è·å–ä¸æŒ‰é’®åŒä¸€å±‚çš„ç»„ä»¶
 		JButton jButton = (JButton)arg0.getSource();
 		String btnanme = jButton.getName();
 
-		//»ñÈ¡×î¶¥²ãpanel
+		//è·å–æœ€é¡¶å±‚panel
 		Container topPanel =  this.inScrollPanel.getParent().getParent().getParent();
 		switch (btnanme) {
 		case "additem":
 			
 			TaskItem itemPanel =  new TaskItem(topPanel);
+			
 			JTextField intervalDayTF = (JTextField)UiUtil.getCompon(topPanel,"intervalDay" );
 			String intervalDay = intervalDayTF.getText();
-			if(intervalDay.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "ÌìÊı²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			itemPanel.setIntervalDay(intervalDay);
 			
 			JTextField intervalHourTF = (JTextField)UiUtil.getCompon(topPanel,"intervalHour" );
 			String intervalHour =  intervalHourTF.getText();
-			if(intervalHour.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "Ğ¡Ê±²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			itemPanel.setIntervalHour(intervalHourTF.getText());
-			
 			
 			JTextField intervalMinTF = (JTextField)UiUtil.getCompon(topPanel,"intervalMin" );
 			String intervalMin =  intervalMinTF.getText();
-			if(intervalMin.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "·ÖÖÓ²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			itemPanel.setIntervalMin(intervalMinTF.getText());
 			
-	
 			JTextField intervalSecondTF = (JTextField)UiUtil.getCompon(topPanel,"intervalSecond" );
 			String intervalSecond =  intervalSecondTF.getText();
-			if(intervalSecond.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "ÃëÖÓ²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			if(Integer.parseInt(intervalSecond) <= 0 && intervalMin.isEmpty() && intervalHour.isEmpty() &&intervalDay.isEmpty() ) {
-				JOptionPane.showMessageDialog(null, "ÃëÖÓ±ØĞë´óÓÚ0","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			itemPanel.setIntervalSecond(intervalSecond);
 			
 			JTextField nameTF = (JTextField)UiUtil.getCompon(topPanel,"name" );
 			String name = nameTF.getText();
-			if(name.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Ãû³Æ²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			itemPanel.setName(name);
 			
 			JTextField siteTF = (JTextField)UiUtil.getCompon(topPanel,"site" );
 			String site = siteTF.getText();
-			if(name.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "ÍøÖ·²»ÄÜÎª¿Õ","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
-			Pattern pattern = Pattern.compile("^(http|https){1}://[\\s\\w\\W]*?");
-			Matcher matcher = pattern.matcher(site);
-			if(!matcher.matches()) {
-				JOptionPane.showMessageDialog(null, "ÍøÖ·¸ñÊ½´íÎó","´íÎó",JOptionPane.ERROR_MESSAGE);return;
-			}
+			
+			boolean re = itemPanel.checkform(name, site, intervalDay, intervalHour, intervalMin, intervalSecond);
+			if(!re)
+				return;
+			
+			itemPanel.setIntervalDay(intervalDay);
+			itemPanel.setIntervalHour(intervalHourTF.getText());
+			itemPanel.setIntervalMin(intervalMinTF.getText());
+			itemPanel.setIntervalSecond(intervalSecond);
+			itemPanel.setName(name);
 			itemPanel.setSite(site);
 			
 			int size = arrayList.size();
-			itemPanel.create("itempanel"+String.valueOf(size+1)); 
-			
+			itemPanel.create("itempanel"+String.valueOf(size+1)+new Date().getTime()); 
 			arrayList.add(itemPanel);
+			
 //			this.inScrollPanel.setLayout(new GridLayout(size+1,1));
 			JPanel item = itemPanel.getItem();
 			int itemheight =  new Double(item.getPreferredSize().getHeight()).intValue();
 			
-			//²é¿´ÈÎÎñÁĞ±í×Ü¸ß¶È
+			//æŸ¥çœ‹ä»»åŠ¡åˆ—è¡¨æ€»é«˜åº¦
 			int newsize = arrayList.size();
 			int tempheight = itemheight*newsize;
 			int newheight = this.inScrollPanel.getHeight();
@@ -288,6 +266,9 @@ class clickAction implements ActionListener{
 			
 			this.inScrollPanel.setPreferredSize(new Dimension(this.inScrollPanel.getWidth(), newheight));
 			this.inScrollPanel.add(item);
+			//åˆ é™¤ç”¨çš„
+			itemPanel.setArrayList(arrayList);
+			itemPanel.setParent(this.inScrollPanel);
 			break;
 
 		default:
@@ -320,54 +301,65 @@ class TaskItem implements Runnable{
 	
 	private Container topPanel;
 
-	private String itemname ;			//Ã¿Ò»Ïî×îÍâ²ãpanel
-	private String itemname1;	//×Ópanel1
-	private String itemname2 ;	//×Ópanel2
-	private String itemnameLastRefleshValue; // ÉÏ´ÎË¢ĞÂlabel name
-	private String itemnameNextRefleshValue; // ÏÂ´ÎË¢ĞÂlabel name
+	private String itemname ;			//æ¯ä¸€é¡¹æœ€å¤–å±‚panel
+	private String itemname1;	//å­panel1
+	private String itemname2 ;	//å­panel2
+	private String itemnameLastRefleshValue; // ä¸Šæ¬¡åˆ·æ–°label name
+	private String itemnameNextRefleshValue; // ä¸‹æ¬¡åˆ·æ–°label name
 	
-	private JButton beginbtn;				//µ¥¸öÔËĞĞ°´Å¥
-	private JPanel item;					//µ¥¸öÈÎÎñjpanel
+	private JButton beginbtn;				//å•ä¸ªè¿è¡ŒæŒ‰é’®
+	private JPanel item;					//å•ä¸ªä»»åŠ¡jpanel
 
-	boolean flag = false;		//Ïß³ÌÔİÍ£¼ÌĞø±êÖ¾¡¢
-	public Thread t;			//Ïß³Ì¾ä±ú
-	private String tname; 		//Ïß³ÌÃû³Æ
+	boolean flag = false;		//çº¿ç¨‹æš‚åœç»§ç»­æ ‡å¿—ã€
+	public Thread t;			//çº¿ç¨‹å¥æŸ„
+	private String tname; 		//çº¿ç¨‹åç§°
 
-
+	
+	
+	private JLabel lastRefleshValue;			//æ˜¾ç¤ºä¸Šæ¬¡åˆ·æ–° 
+	private JLabel refleshConditionValue;		//æ˜¾ç¤ºåˆ·æ–°æ—¶é—´
+	private JLabel nextRefleshValue;			//æ˜¾ç¤ºä¸‹æ¬¡åˆ·æ–°å‰©ä½™æ—¶é—´
+	private JLabel nameValue;					//æ˜¾ç¤ºä»»åŠ¡åç§°
+	private JLabel siteValue;					//æ˜¾ç¤ºç½‘å€
+	
+	
+	private ArrayList<TaskItem> arrayList;		//ä»»åŠ¡åˆ—è¡¨
+	private JPanel inScrollPane;			//çˆ¶çº§æ»šåŠ¨æ¡†
+	
 	
 	public TaskItem(Container topPanel) {
 		// TODO Auto-generated constructor stub
 		this.topPanel = topPanel;
 	}
 	/**
-	 * ´´½¨ÈÎÎñ
+	 * åˆ›å»ºä»»åŠ¡
 	 * @param itemname
 	 * 
 	 */
 	public void create(String tempname) {
 	
-		 this.itemname = tempname;			//Ã¿Ò»Ïî×îÍâ²ãpanel
-		 this.itemname1 = tempname+"1";	//×Ópanel1
-		 this.itemname2 = tempname+"2";	//×Ópanel2
-		 this.itemnameLastRefleshValue = tempname+"lastRefleshValue"; // ÉÏ´ÎË¢ĞÂlabel name
-		 this.itemnameNextRefleshValue = tempname+"nextRefleshValue"; // ÏÂ´ÎË¢ĞÂlabel name
+		 this.itemname = tempname;			//æ¯ä¸€é¡¹æœ€å¤–å±‚panel
+		 this.itemname1 = tempname+"1";	//å­panel1
+		 this.itemname2 = tempname+"2";	//å­panel2
+		 this.itemnameLastRefleshValue = tempname+"lastRefleshValue"; // ä¸Šæ¬¡åˆ·æ–°label name
+		 this.itemnameNextRefleshValue = tempname+"nextRefleshValue"; // ä¸‹æ¬¡åˆ·æ–°label name
 		 
 		
-		//ÉÏÒ»´ÎË¢ĞÂÊ±¼ä³õÊ¼»¯
+		//ä¸Šä¸€æ¬¡åˆ·æ–°æ—¶é—´åˆå§‹åŒ–
 		this.lastReflesh = "0000-00-00 00:00:00";
-		//Ë¢ĞÂ¼ä¸ôÊ±¼ä
-		this.refleshCondition = this.intervalDay+"Ìì"+this.intervalHour+"Ê±"+this.intervalMin+"·Ö"+this.intervalSecond+"Ãë";
-		//ÏÂ´ÎË¢ĞÂÊ±¼ä
-		this.nextReflesh = this.intervalDay+"Ìì"+this.intervalHour+"Ê±"+this.intervalMin+"·Ö"+this.intervalSecond+"Ãë";
-		//×ÜÃëÊı
+		//åˆ·æ–°é—´éš”æ—¶é—´
+		this.refleshCondition = this.intervalDay+"å¤©"+this.intervalHour+"æ—¶"+this.intervalMin+"åˆ†"+this.intervalSecond+"ç§’";
+		//ä¸‹æ¬¡åˆ·æ–°æ—¶é—´
+		this.nextReflesh = this.intervalDay+"å¤©"+this.intervalHour+"æ—¶"+this.intervalMin+"åˆ†"+this.intervalSecond+"ç§’";
+		//æ€»ç§’æ•°
 		this.nextReflesh_timestamp = Integer.parseInt(this.intervalDay)*86400
 				+Integer.parseInt(this.intervalHour)*3600
 				+Integer.parseInt(this.intervalMin)*60
 				+Integer.parseInt(this.intervalSecond);
-		//±ä»¯µÄÃëÊı
+		//å˜åŒ–çš„ç§’æ•°
 		this.timestamp = this.nextReflesh_timestamp;
 		
-		//¹¹½¨item
+		//æ„å»ºitem
 		item = new JPanel(new FlowLayout());
 		item.setPreferredSize(new Dimension(1000,150));
 		item.setName(itemname);
@@ -378,62 +370,64 @@ class TaskItem implements Runnable{
 		JPanel itemchild2 = new JPanel();
 		
 		
-		//µã»÷ÉèÖÃ°´Å¥Ê±ÏÔÊ¾±à¼­¿ò£¬Ä¬ÈÏÒş²Ø
+		//ç‚¹å‡»è®¾ç½®æŒ‰é’®æ—¶æ˜¾ç¤ºç¼–è¾‘æ¡†ï¼Œé»˜è®¤éšè—
 		itemedit.setVisible(false);
-		//ÈÎÎñÃû³Æ
-				JLabel edit_nameLabel = new JLabel("Ãû³Æ");
+				//ä»»åŠ¡åç§°
+				JLabel edit_nameLabel = new JLabel("åç§°");
 				JTextField edit_name = new JTextField();
 				edit_name.setText(this.name);
 				edit_name.setPreferredSize(new Dimension(60,30));
 				itemedit.add(edit_nameLabel);
 				itemedit.add(edit_name);
 				
-				//ÈÎÎñÍøÖ·
-				JLabel edit_siteLabel = new JLabel("ÍøÖ·");
+				//ä»»åŠ¡ç½‘å€
+				JLabel edit_siteLabel = new JLabel("ç½‘å€");
 				JTextField edit_site = new JTextField();
 				edit_site.setText(this.site);
 				edit_site.setPreferredSize(new Dimension(150,30));
 				itemedit.add(edit_siteLabel);
 				itemedit.add(edit_site);
 				
-				//Ë¢ĞÂ¼ä¸ô
-				JLabel edit_intervalRefleshLabel =  new JLabel("Ë¢ĞÂ¼ä¸ô");
+				//åˆ·æ–°é—´éš”
+				JLabel edit_intervalRefleshLabel =  new JLabel("åˆ·æ–°é—´éš”");
 				itemedit.add(edit_intervalRefleshLabel);
-				//Ìì
+				//å¤©
 				
 				JTextField edit_intervalDay =  new JTextField("0");
 				edit_intervalDay.setText(this.intervalDay);
 				edit_intervalDay.setPreferredSize(new Dimension(40,30));
-				JLabel edit_intervalDayLabel =  new JLabel("Ìì");
+				JLabel edit_intervalDayLabel =  new JLabel("å¤©");
 				itemedit.add(edit_intervalDayLabel);
 				itemedit.add(edit_intervalDay);
 				
-				//Ê±
+				//æ—¶
 			
 				JTextField edit_intervalHour =  new JTextField("0");
 				edit_intervalHour.setText(this.intervalHour);
 				edit_intervalHour.setPreferredSize(new Dimension(40,30));
-				JLabel edit_intervalHourLabel =  new JLabel("Ê±");
+				JLabel edit_intervalHourLabel =  new JLabel("æ—¶");
 				itemedit.add(edit_intervalHourLabel);
 				itemedit.add(edit_intervalHour);
 
-				//·Ö
+				//åˆ†
 				JTextField edit_intervalMin =  new JTextField("0");
 				edit_intervalMin.setText(this.intervalMin);
 				edit_intervalMin.setPreferredSize(new Dimension(40,30));
-				JLabel edit_intervalMinLabel =  new JLabel("·Ö");
+				JLabel edit_intervalMinLabel =  new JLabel("åˆ†");
 				itemedit.add(edit_intervalMinLabel);
 				itemedit.add(edit_intervalMin);
 				
-				//Ãë
+				//ç§’
 			
 				JTextField edit_intervalSecond =  new JTextField("0");
 				edit_intervalSecond.setText(this.intervalSecond);
 				edit_intervalSecond.setPreferredSize(new Dimension(40,30));
-				JLabel edit_intervalSecondLabel =  new JLabel("Ãë");
+				JLabel edit_intervalSecondLabel =  new JLabel("ç§’");
 				itemedit.add(edit_intervalSecondLabel);
 				itemedit.add(edit_intervalSecond);
-				JButton fanhui = new JButton("·µ»Ø");
+				
+				//è¿”å›æŒ‰é’®
+				JButton fanhui = new JButton("è¿”å›");
 				fanhui.addActionListener(new ActionListener() {
 					
 					@Override
@@ -445,52 +439,154 @@ class TaskItem implements Runnable{
 				});
 				itemedit.add(fanhui);
 				
+				//æäº¤æŒ‰é’®
+				JButton submit = new JButton("æäº¤");
+				submit.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						//è·å–è¡¨å•å€¼
+						String str_name = edit_name.getText();
+						String str_site = edit_site.getText();
+						String str_intervalDay = edit_intervalDay.getText();
+						String str_intervalHour = edit_intervalHour.getText();
+						String str_intervalMin = edit_intervalMin.getText();
+						String str_intervalSecond = edit_intervalSecond.getText();
+						
+						boolean re = checkform(str_name, str_site, str_intervalDay, str_intervalHour, str_intervalMin, str_intervalSecond);
+						if(!re)
+							return;
+						name  = str_name;
+						site = str_site;
+						
+						//è®¾ç½®æœ€æ–°æ˜¾ç¤º
+						nameValue.setText(name);
+						siteValue.setText(site);
+						
+						if(intervalDay.equals(str_intervalDay) && intervalHour.equals(str_intervalHour) && intervalMin.equals(str_intervalMin) && intervalSecond.equals(str_intervalSecond))
+						{
+							
+						}else {
+							intervalDay = str_intervalDay;
+							intervalHour = str_intervalHour;
+							intervalMin = str_intervalMin;
+							intervalSecond = str_intervalSecond;
+							refleshConditionValue.setText(intervalDay+"å¤©"+intervalHour+"æ—¶"+intervalMin+"åˆ†"+intervalSecond+"ç§’");
+							nextRefleshValue.setText(intervalDay+"å¤©"+intervalHour+"æ—¶"+intervalMin+"åˆ†"+intervalSecond+"ç§’");
+							
+							//æ€»ç§’æ•°
+							nextReflesh_timestamp = Integer.parseInt(intervalDay)*86400
+									+Integer.parseInt(intervalHour)*3600
+									+Integer.parseInt(intervalMin)*60
+									+Integer.parseInt(intervalSecond);
+							//å˜åŒ–çš„ç§’æ•°
+							timestamp = nextReflesh_timestamp;
+						}
+						
+						
+						//éšè—itemedit ï¼Œ æ˜¾ç¤ºitemchild
+						itemedit.setVisible(false);
+						itemchild.setVisible(true);
+						//å¼€å¯ä»»åŠ¡
+						startTask();
+						beginbtn.setName("suspend");
+						beginbtn.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+					}
+				});
+				itemedit.add(submit);
+				
+				//åˆ é™¤æŒ‰é’®
+				/**
+				 * System.out.println(arrayList.size());
+				System.out.println(inScrollPane.getComponentCount());
+				 * 
+				 */
+				JButton del = new JButton("åˆ é™¤");
+				
+				del.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+							//è·å–é«˜åº¦
+						int itemheight =  new Double(item.getPreferredSize().getHeight()).intValue();
+						
+							//åˆ é™¤æ»šåŠ¨æ¡å­˜å‚¨çš„å…ƒç´ 
+							inScrollPane.remove(item);
+							//åˆ é™¤é›†åˆé‡Œçš„å…ƒç´ 
+							
+							
+							for (int i = 0; i < arrayList.size(); i++) {
+								if(arrayList.get(i).getItemname().equals(itemname)) {
+									System.out.println(arrayList.get(i).getItemname());
+									arrayList.remove(i);
+								}
+							}
+							//æŸ¥çœ‹ä»»åŠ¡åˆ—è¡¨æ€»é«˜åº¦
+							
+							int newsize = arrayList.size();
+							int tempheight = itemheight*newsize;
+							int newheight = inScrollPane.getHeight();
+							if(tempheight < inScrollPane.getHeight()) {
+								newheight -= itemheight;
+							}
+							
+							inScrollPane.setPreferredSize(new Dimension(inScrollPane.getWidth(), newheight));
+							//é‡æ–°åˆ·æ–°
+							inScrollPane.repaint();
+							
+						}
+					
+				});
+				itemedit.add(del);
+				
 		
-		
-		//·Ç±à¼­×´Ì¬ÏÂ,itemchild ÎªÏÔÊ¾×´Ì¬£¬µã»÷±à¼­ºóÒş²Ø
+		//éç¼–è¾‘çŠ¶æ€ä¸‹,itemchild ä¸ºæ˜¾ç¤ºçŠ¶æ€ï¼Œç‚¹å‡»ç¼–è¾‘åéšè—
 		itemchild1.setName(itemname1);
 		itemchild1.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		
-		JLabel lastRefleshLabel = new JLabel("ÉÏ´ÎË¢ĞÂ£º");
-		JLabel lastRefleshValue = new JLabel(this.lastReflesh);
+		JLabel lastRefleshLabel = new JLabel("ä¸Šæ¬¡åˆ·æ–°ï¼š");
+		lastRefleshValue = new JLabel(this.lastReflesh);
 		lastRefleshValue.setPreferredSize(new Dimension(300,30));
 		lastRefleshValue.setName(this.itemnameLastRefleshValue);
 		itemchild1.add(lastRefleshLabel);
 		itemchild1.add(lastRefleshValue);
 		
 		
-		JLabel refleshConditionLabel = new JLabel("Ë¢ĞÂ¼ä¸ô£º");
-		JLabel refleshConditionValue = new JLabel(this.refleshCondition);
+		JLabel refleshConditionLabel = new JLabel("åˆ·æ–°é—´éš”ï¼š");
+		refleshConditionValue = new JLabel(this.refleshCondition);
 		refleshConditionValue.setPreferredSize(new Dimension(250,30));
 		itemchild1.add(refleshConditionLabel);
 		itemchild1.add(refleshConditionValue);
 		
 		
-		JLabel nextRefleshLabel = new JLabel("ÏÂ´ÎË¢ĞÂ£º");
-		JLabel nextRefleshValue = new JLabel(this.nextReflesh);
+		JLabel nextRefleshLabel = new JLabel("ä¸‹æ¬¡åˆ·æ–°ï¼š");
+		nextRefleshValue = new JLabel(this.nextReflesh);
 		nextRefleshValue.setPreferredSize(new Dimension(100,30));
 		nextRefleshValue.setName(this.itemnameNextRefleshValue);
 		itemchild1.add(nextRefleshLabel);
 		itemchild1.add(nextRefleshValue);
 		
 		
-		//ÉèÖÃ°´Å¥
+		//è®¾ç½®æŒ‰é’®
 		JButton setBtn = new JButton(new ImageIcon("./src/res/icon/set.png")); 
 		setBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//Ê×ÏÈÍ£Ö¹µ±Ç°ÈÎÎñ
+				//é¦–å…ˆåœæ­¢å½“å‰ä»»åŠ¡
 				if(beginbtn.getName().equals("suspend")) {
 					suspend();
 					beginbtn.setName("begin");
 					beginbtn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
 				}
-				//Òş²Øitemchild
+				//éšè—itemchild
 				itemchild.setVisible(false);
-				//ÏÔÊ¾±à¼­  itemedit
+				//æ˜¾ç¤ºç¼–è¾‘  itemedit
 				itemedit.setVisible(true);
 			}
 		});
@@ -498,28 +594,31 @@ class TaskItem implements Runnable{
 	
 		itemchild2.setName(itemname2);
 		itemchild2.setLayout(new FlowLayout(FlowLayout.CENTER));
-		JLabel nameLabel = new JLabel("ÍøÕ¾Ãû³Æ£º");
-		JLabel name = new JLabel(this.name);
-		name.setPreferredSize(new Dimension(300,30));
+		JLabel nameLabel = new JLabel("ç½‘ç«™åç§°ï¼š");
+		nameValue = new JLabel(this.name);
+		nameValue.setPreferredSize(new Dimension(300,30));
 		itemchild2.add(nameLabel);
-		itemchild2.add(name);
+		itemchild2.add(nameValue);
 		
-		JLabel siteLabel = new JLabel("ÍøÖ·£º");
-		JLabel site = new JLabel(this.site);
-		site.setPreferredSize(new Dimension(400,30));
+		JLabel siteLabel = new JLabel("ç½‘å€ï¼š");
+		siteValue = new JLabel(this.site);
+		siteValue.setPreferredSize(new Dimension(400,30));
 		itemchild2.add(siteLabel);
-		itemchild2.add(site);
+		itemchild2.add(siteValue);
 		
-		//ÓÒ±ßÁ½¸ö°´Å¥
+		//å³è¾¹ä¸¤ä¸ªæŒ‰é’®
 		JPanel rightbtnpanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		rightbtnpanel.setPreferredSize(new Dimension(100,30));
-		//ÏÂÀ­°´Å¤
+		//ä¸‹æ‹‰æŒ‰æ‰­
 		JButton detailbtn = new JButton(new ImageIcon("./src/res/icon/pulldown.png"));	
 		detailbtn.setPreferredSize(new Dimension(30,30));
 		detailbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				
+				
 				JPanel w_panel =  (JPanel)UiUtil.getCompon(topPanel, itemname+"w_dpanel");
 				if(w_panel.isVisible()) {
 					w_panel.setVisible(false);
@@ -537,7 +636,7 @@ class TaskItem implements Runnable{
 		});
 		rightbtnpanel.add(detailbtn);
 		
-		//µ¥¸ö¿ªÊ¼°´Å¥
+		//å•ä¸ªå¼€å§‹æŒ‰é’®
 		beginbtn = new JButton(new ImageIcon("./src/res/icon/begin.png"));
 		beginbtn.setPreferredSize(new Dimension(30,30));
 		beginbtn.setName("begin");
@@ -570,7 +669,7 @@ class TaskItem implements Runnable{
 		item.add(itemedit);
 		
 		
-		//ÏêÏ¸·µ»ØĞÅÏ¢
+		//è¯¦ç»†è¿”å›ä¿¡æ¯
 		JPanel w_dpanel = new JPanel(new FlowLayout());
 		w_dpanel.setVisible(false);
 		w_dpanel.setName(itemname+"w_dpanel");
@@ -590,7 +689,7 @@ class TaskItem implements Runnable{
 
 		item.add(w_dpanel);
 		
-		//ºáÏß
+		//æ¨ªçº¿
 		JLabel panel_1=new JLabel(new ImageIcon("./src/res/icon/line.png"));
 		panel_1.setPreferredSize(new Dimension(1000,5));
 		item.add(panel_1); 
@@ -600,16 +699,28 @@ class TaskItem implements Runnable{
 	
 	/**
 	 * 
-	 * ¿ªÊ¼¼Æ»®ÈÎÎñ
+	 * å¼€å§‹è®¡åˆ’ä»»åŠ¡
 	 * 
 	 */
 	public void startTask() {
-		//¿ªÊ¼ÈÎÎñ
+		//å¼€å§‹ä»»åŠ¡
 		if(t == null) {
 			start();
 		}else {
 			resume();
 		}	
+	}
+	
+	public String getItemname() {
+		return this.itemname;
+	}
+	
+	public void setParent(JPanel inScrollPane) {
+		this.inScrollPane = inScrollPane;
+	}
+	
+	public void setArrayList(ArrayList<TaskItem> arrayList) {
+		this.arrayList = arrayList;
 	}
 	
 	public JPanel getItem() {
@@ -683,6 +794,7 @@ class TaskItem implements Runnable{
 		// TODO Auto-generated method stub
 		synchronized (this) {	
 			while(true) {
+			
 				while(flag) {
 					try {
 						wait();
@@ -699,7 +811,7 @@ class TaskItem implements Runnable{
 							public void run() {
 								// TODO Auto-generated method stub
 								JTextArea jp = (JTextArea)UiUtil.getCompon(topPanel, itemname+"dTextArea");
-								jp.setText("»ñÈ¡Êı¾İÖĞ....");
+								jp.setText("è·å–æ•°æ®ä¸­....");
 								String result  = UiUtil.sendRequest(site);
 								jp.setText(result);
 							}
@@ -708,21 +820,21 @@ class TaskItem implements Runnable{
 						
 						this.timestamp = this.nextReflesh_timestamp;
 						
-						//ĞŞ¸ÄÉÏÒ»´ÎË¢ĞÂÊ±¼ä
+						//ä¿®æ”¹ä¸Šä¸€æ¬¡åˆ·æ–°æ—¶é—´
 						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						String newtext = df.format(new Date());
 						JLabel newjl = (JLabel)UiUtil.getCompon(this.topPanel,this.itemnameLastRefleshValue);
 						newjl.setText(newtext);
 					}
 					
-					//ĞŞ¸ÄÏÂ´ÎË¢ĞÂÊ±¼ä
+					//ä¿®æ”¹ä¸‹æ¬¡åˆ·æ–°æ—¶é—´
 					this.nextReflesh = UiUtil.getTimeFormat(this.timestamp);
 					JLabel newjll = (JLabel)UiUtil.getCompon(this.topPanel,this.itemnameNextRefleshValue);
 					newjll.setText(this.nextReflesh);
 					this.timestamp-- ;
 					
 					
-					//Ë¢ĞÂÃæ°å
+					//åˆ·æ–°é¢æ¿
 					this.topPanel.revalidate();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -737,7 +849,7 @@ class TaskItem implements Runnable{
 	}
 	
 	
-	//¿ªÊ¼
+	//å¼€å§‹
 	public void start() {
 		if(this.t == null) {
 			this.t = new Thread(this,this.itemname);
@@ -745,69 +857,122 @@ class TaskItem implements Runnable{
 		}
 	}
 	
-	//ÔİÍ£
+	//æš‚åœ
 	public void suspend() {
 		this.flag = true;
 	}
 	
-	//¼ÌĞø
+	//ç»§ç»­
 	public synchronized void  resume() {
 		this.flag = false;
 		notify();
 	}
 	
+	
+	/**
+	 ****************************************************************************************
+	 */
+	/**
+	 * 
+	 * æ£€æŸ¥è¡¨å•æä»·
+	 * @param name
+	 * @param site
+	 * @param intervalDay
+	 * @param intervalHour
+	 * @param intervalMin
+	 * @param intervalSecond
+	 * @return
+	 */
+	protected boolean checkform(String name,String site,String intervalDay,String intervalHour,String intervalMin,String intervalSecond) {
+		
+		if(intervalDay.isEmpty() ) {
+			JOptionPane.showMessageDialog(null, "å¤©æ•°ä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		
+		if(intervalHour.isEmpty() ) {
+			JOptionPane.showMessageDialog(null, "å°æ—¶ä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		
+		if(intervalMin.isEmpty() ) {
+			JOptionPane.showMessageDialog(null, "åˆ†é’Ÿä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		
+		if(intervalSecond.isEmpty() ) {
+			JOptionPane.showMessageDialog(null, "ç§’é’Ÿä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		if(Integer.parseInt(intervalSecond) <= 0 && intervalMin.equals("0") && intervalHour.equals("0") &&intervalDay.equals("0") ) {
+			JOptionPane.showMessageDialog(null, "ç§’é’Ÿå¿…é¡»å¤§äº0","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+	
+		if(name.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "åç§°ä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		
+		if(site.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "ç½‘å€ä¸èƒ½ä¸ºç©º","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		Pattern pattern = Pattern.compile("^(http|https){1}://[\\s\\w\\W]*?");
+		Matcher matcher = pattern.matcher(site);
+		if(!matcher.matches()) {
+			JOptionPane.showMessageDialog(null, "ç½‘å€æ ¼å¼é”™è¯¯","é”™è¯¯",JOptionPane.ERROR_MESSAGE);return false;
+		}
+		
+		return true;
+	}
+	
+	
 }
 
- class ReadThread implements Runnable{
-	  public Thread t;
-	  private String threadName;
-	  boolean suspended=false;
-	  public ReadThread(String threadName){
-	   this.threadName=threadName;
-	   System.out.println("Creating " + threadName );
-	  }
-	  public void run() {
-	   for(int i = 10; i > 0; i--) {
-	   System.out.println("Thread: " + threadName + ", " + i);
-	   // Let the thread sleep for a while.
-	   try {
-	    Thread.sleep(300);
-	    synchronized(this) {
-	     while(suspended) {
-	    	 wait();
-	     }
-	    }
-	   } catch (InterruptedException e) {
-	    System.out.println("Thread " + threadName + " interrupted.");
-	    e.printStackTrace();
-	   }
-	   System.out.println("Thread " + threadName + " exiting.");
-	   }
-	  }
-	  /**
-	   * ¿ªÊ¼
-	   */
-	  public void start(){
-	   System.out.println("Starting " + threadName );
-	   if(t==null){
-	    t=new Thread(this, threadName);
-	    t.start();
-	   }
-	  }
-	  /**
-	   * ÔİÍ£
-	   */
-	   void suspend(){
-	   suspended = true;
-	  }
-	   /**
-	   * ¼ÌĞø
-	   */
-	   synchronized void resume(){
-	    suspended = false;
-	    notify();
-	   }
-	 }
+// class ReadThread implements Runnable{
+//	  public Thread t;
+//	  private String threadName;
+//	  boolean suspended=false;
+//	  public ReadThread(String threadName){
+//	   this.threadName=threadName;
+//	   System.out.println("Creating " + threadName );
+//	  }
+//	  public void run() {
+//	   for(int i = 10; i > 0; i--) {
+//	   System.out.println("Thread: " + threadName + ", " + i);
+//	   // Let the thread sleep for a while.
+//	   try {
+//	    Thread.sleep(300);
+//	    synchronized(this) {
+//	     while(suspended) {
+//	    	 wait();
+//	     }
+//	    }
+//	   } catch (InterruptedException e) {
+//	    System.out.println("Thread " + threadName + " interrupted.");
+//	    e.printStackTrace();
+//	   }
+//	   System.out.println("Thread " + threadName + " exiting.");
+//	   }
+//	  }
+//	  /**
+//	   * å¼€å§‹
+//	   */
+//	  public void start(){
+//	   System.out.println("Starting " + threadName );
+//	   if(t==null){
+//	    t=new Thread(this, threadName);
+//	    t.start();
+//	   }
+//	  }
+//	  /**
+//	   * æš‚åœ
+//	   */
+//	   void suspend(){
+//	   suspended = true;
+//	  }
+//	   /**
+//	   * ç»§ç»­
+//	   */
+//	   synchronized void resume(){
+//	    suspended = false;
+//	    notify();
+//	   }
+//	 }
  
 
 
