@@ -18,7 +18,7 @@ public class UiUtil {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//¸ù¾İÃû³Æ»ñÈ¡¶ÔÓ¦µÄ×é¼ş
+	//æ ¹æ®åç§°è·å–å¯¹åº”çš„ç»„ä»¶
 	public static Component  getCompon(Container comp,String name) {
 		Component returncom = null;
 		int count =comp.getComponentCount();
@@ -49,28 +49,28 @@ public class UiUtil {
 		return returncom;
 	}
 	
-	//¸ñÊ½»¯Ê£ÓàÊ±¼ä
+	//æ ¼å¼åŒ–å‰©ä½™æ—¶é—´--
 	public static String getTimeFormat(int timestamp) {
 		int day = timestamp/86400;
 		int hour = (timestamp-day*86400)/3600;
 		int min = (timestamp-day*86400-hour*3600)/60;
 		int second = timestamp-day*86400-hour*3600-min*60;
 		
-		return day+"Ìì"+hour+"Ê±"+min+"·Ö"+second+"Ãë";
+		return day+"å¤©"+hour+"æ—¶"+min+"åˆ†"+second+"ç§’";
 	}
 	
-	//ÇëÇóµØÖ·
+	//è¯·æ±‚åœ°å€
 	public static String sendRequest(String requesturl) {
 		String string ="";
 		try {
-			//½¨Á¢Á¬½Ó
+			//å»ºç«‹è¿æ¥
 			URL url = new URL(requesturl);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoInput(true);
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 			
-			//»ñÈ¡ÊäÈëÁ÷
+			//è·å–è¾“å…¥æµ
 			InputStream inputStream = connection.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"utf-8");
 			BufferedReader bf = new BufferedReader(inputStreamReader);
