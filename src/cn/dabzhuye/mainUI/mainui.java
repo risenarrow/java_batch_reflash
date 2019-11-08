@@ -11,7 +11,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,9 +52,47 @@ class uiclass{
 	private JPanel inScrollPanel;
 	private JPanel jPanel3;
 	private JScrollPane scrollPane;
+	private ArrayList<TaskItem> arrayList;
 	public void showWindows() {
 		
-		ArrayList<TaskItem> arrayList = new ArrayList<TaskItem>();
+		arrayList = new ArrayList<TaskItem>();
+		
+		//获取序列化对象
+		InputStream instream = null;
+		ObjectInputStream obj_instream = null;
+		try {
+			File file = new File("./object.ser");
+			if(file.exists()) {
+				instream = new FileInputStream(file);
+				obj_instream = new ObjectInputStream(instream);
+				Object obj = obj_instream.readObject();
+				arrayList = (ArrayList<TaskItem>)obj;
+			}
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+			try {
+				if(instream!= null) {
+					instream.close();
+				}
+				if(obj_instream != null) {
+					obj_instream.close();
+				}
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
+		
 		
 		int framewith = 1000;
 		JFrame jFrame = new JFrame("测试");
@@ -73,6 +113,9 @@ class uiclass{
 //		inScrollPanel.setLayout(new GridLayout(1,1));
 		inScrollPanel.setLayout(new FlowLayout());
 		inScrollPanel.setPreferredSize(new Dimension(framewith,0));
+		
+		
+		
 		scrollPane = new JScrollPane(inScrollPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		wai_bao_panel.add(scrollPane);		
 		
@@ -152,10 +195,13 @@ class uiclass{
 			public void actionPerformed(ActionEvent e) {
 				int leng = arrayList.size();
 				for(int i = 0;i<leng;i++) {
-					arrayList.get(i).startTask();
+					
 					JButton tempButton =  arrayList.get(i).getBeginbtn();
-					tempButton.setName("suspend");
-					tempButton.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+					if(tempButton.getName().equals("begin")) {
+						arrayList.get(i).startTask();
+						tempButton.setName("suspend");
+						tempButton.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+					}
 				}
 			}
 		});
@@ -171,10 +217,13 @@ class uiclass{
 				// TODO Auto-generated method stub
 				int leng = arrayList.size();
 				for(int i = 0;i<leng;i++) {
-					arrayList.get(i).suspend();
+					
 					JButton tempButton =  arrayList.get(i).getBeginbtn();
-					tempButton.setName("begin");
-					tempButton.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+					if(tempButton.getName().equals("suspend")) {
+						arrayList.get(i).suspend();
+						tempButton.setName("begin");
+						tempButton.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+					}
 				}
 			}
 		});
@@ -184,12 +233,70 @@ class uiclass{
 		containerPanel.add(jPanel3,BorderLayout.NORTH);
 		containerPanel.add(scrollPane,BorderLayout.CENTER);
 		
-		
+
+		//如果arrayList不为空则添加到滚动面板
+		if(arrayList.size()>0) {
+			int thissize = arrayList.size();
+			int newheight = 0;
+			for (int i = 0; i < thissize; i++) {
+				TaskItem itemPanel = arrayList.get(i);
+				itemPanel.setName(UiUtil.unicodeDecode(itemPanel.getName()));
+				itemPanel.setTopPanel(containerPanel);
+				itemPanel.create("itempanel"+i+new Date().getTime());
+				
+				JPanel item = itemPanel.getItem();
+				int itemheight =  new Double(item.getPreferredSize().getHeight()).intValue();
+				
+				//查看任务列表总高度
+				newheight += itemheight;
+				inScrollPanel.add(item);
+				//删除用的
+				itemPanel.setArrayList(arrayList);
+				itemPanel.setParent(inScrollPanel);
+			}
+			inScrollPanel.setPreferredSize(new Dimension(this.inScrollPanel.getWidth(), newheight));
+		}
 	
 		
 		jFrame.add(containerPanel);
 		jFrame.setVisible(true);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				OutputStream outstream = null;
+				ObjectOutputStream objoutstream = null;
+				try {
+					int arrsize = arrayList.size();
+					if(arrsize > 0) {
+						for (int i = 0; i < arrsize; i++) {
+							TaskItem item = arrayList.get(i);
+							item.setName(UiUtil.unicodeEncode(item.getName())); 
+						}
+					}
+					outstream = new FileOutputStream("./object.ser");
+					objoutstream = new ObjectOutputStream(outstream);
+					objoutstream.writeObject(arrayList);
+				}catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}finally {
+					try {
+						if(outstream != null) {
+							outstream.close();
+						}
+						if(objoutstream != null) {
+							objoutstream.close();
+						}
+					} catch (IOException e2) {
+						// TODO: handle exception
+						e2.printStackTrace();
+					}
+					
+				}
+			}
+		});
+		
 	}
 }
 
@@ -284,12 +391,16 @@ class clickAction implements ActionListener{
 	
 }
 
-class TaskItem implements Runnable{
-	private String lastReflesh;
-	private String refleshCondition;
-	private String nextReflesh;
-	private int nextReflesh_timestamp;
-	private int timestamp;
+class TaskItem implements Runnable,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	transient private String lastReflesh;
+	transient private String refleshCondition;
+	transient private String nextReflesh;
+	transient private int nextReflesh_timestamp;
+	transient private int timestamp;
 
 	
 	private String intervalDay;
@@ -299,32 +410,33 @@ class TaskItem implements Runnable{
 	private String name;
 	private String site;
 	
-	private Container topPanel;
-
-	private String itemname ;			//每一项最外层panel
-	private String itemname1;	//子panel1
-	private String itemname2 ;	//子panel2
-	private String itemnameLastRefleshValue; // 上次刷新label name
-	private String itemnameNextRefleshValue; // 下次刷新label name
-	
-	private JButton beginbtn;				//单个运行按钮
-	private JPanel item;					//单个任务jpanel
-
-	boolean flag = false;		//线程暂停继续标志、
-	public Thread t;			//线程句柄
-	private String tname; 		//线程名称
+	transient private Container topPanel;
 
 	
+	transient private String itemname ;			//每一项最外层panel
+	transient private String itemname1;	//子panel1
+	transient private String itemname2 ;	//子panel2
+	transient private String itemnameLastRefleshValue; // 上次刷新label name
+	transient private String itemnameNextRefleshValue; // 下次刷新label name
 	
-	private JLabel lastRefleshValue;			//显示上次刷新 
-	private JLabel refleshConditionValue;		//显示刷新时间
-	private JLabel nextRefleshValue;			//显示下次刷新剩余时间
-	private JLabel nameValue;					//显示任务名称
-	private JLabel siteValue;					//显示网址
+	transient private JButton beginbtn;				//单个运行按钮
+	transient private JPanel item;					//单个任务jpanel
+
+	transient boolean flag = false;		//线程暂停继续标志、
+	transient public Thread t;			//线程句柄
+	transient private String tname; 		//线程名称
+
 	
 	
-	private ArrayList<TaskItem> arrayList;		//任务列表
-	private JPanel inScrollPane;			//父级滚动框
+	transient private JLabel lastRefleshValue;			//显示上次刷新 
+	transient private JLabel refleshConditionValue;		//显示刷新时间
+	transient private JLabel nextRefleshValue;			//显示下次刷新剩余时间
+	transient private JLabel nameValue;					//显示任务名称
+	transient private JLabel siteValue;					//显示网址
+	
+	
+	transient private ArrayList<TaskItem> arrayList;		//任务列表
+	transient private JPanel inScrollPane;			//父级滚动框
 	
 	
 	public TaskItem(Container topPanel) {
@@ -709,6 +821,13 @@ class TaskItem implements Runnable{
 		}else {
 			resume();
 		}	
+	}
+	
+	public Container getTopPanel() {
+		return topPanel;
+	}
+	public void setTopPanel(Container topPanel) {
+		this.topPanel = topPanel;
 	}
 	
 	public String getItemname() {
