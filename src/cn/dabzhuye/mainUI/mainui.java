@@ -128,7 +128,8 @@ class uiclass{
 		JButton addButton = new JButton("增加");
 		addButton.setPreferredSize(new Dimension(100,30));
 		addButton.setName("additem");
-		addButton.setIcon(new ImageIcon("./src/res/icon/addicon.png"));
+		
+		addButton.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/addicon.png")));
 		addButton.addActionListener(new clickAction(inScrollPanel,arrayList));
 		
 		//任务名称
@@ -188,7 +189,7 @@ class uiclass{
 		jPanel3.add(addButton);
 		
 		//全部开始
-		JButton beginAll = new JButton("全部开始",new ImageIcon("./src/res/icon/begin.png"));
+		JButton beginAll = new JButton("全部开始",new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 		beginAll.setName("beginAll");
 		beginAll.addActionListener(new ActionListener() {
 			@Override
@@ -200,7 +201,7 @@ class uiclass{
 					if(tempButton.getName().equals("begin")) {
 						arrayList.get(i).startTask();
 						tempButton.setName("suspend");
-						tempButton.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+						tempButton.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/suspend.png")));
 					}
 				}
 			}
@@ -208,7 +209,7 @@ class uiclass{
 		jPanel3.add(beginAll);
 		
 		//全部取消
-		JButton cancelAll = new JButton("全部暂停",new ImageIcon("./src/res/icon/stop.png"));
+		JButton cancelAll = new JButton("全部暂停",new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/stop.png")));
 		cancelAll.setName("cancelAll");
 		cancelAll.addActionListener(new ActionListener() {
 			
@@ -222,7 +223,7 @@ class uiclass{
 					if(tempButton.getName().equals("suspend")) {
 						arrayList.get(i).suspend();
 						tempButton.setName("begin");
-						tempButton.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+						tempButton.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 					}
 				}
 			}
@@ -603,7 +604,7 @@ class TaskItem implements Runnable,Serializable{
 						//开启任务
 						startTask();
 						beginbtn.setName("suspend");
-						beginbtn.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+						beginbtn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/suspend.png")));
 					}
 				});
 				itemedit.add(submit);
@@ -626,7 +627,7 @@ class TaskItem implements Runnable,Serializable{
 						if(beginbtn.getName().equals("suspend")) {
 							suspend();
 							beginbtn.setName("begin");
-							beginbtn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+							beginbtn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 						}
 						
 							//获取高度
@@ -639,7 +640,6 @@ class TaskItem implements Runnable,Serializable{
 							
 							for (int i = 0; i < arrayList.size(); i++) {
 								if(arrayList.get(i).getItemname().equals(itemname)) {
-									System.out.println(arrayList.get(i).getItemname());
 									arrayList.remove(i);
 								}
 							}
@@ -691,7 +691,7 @@ class TaskItem implements Runnable,Serializable{
 		
 		
 		//设置按钮
-		JButton setBtn = new JButton(new ImageIcon("./src/res/icon/set.png")); 
+		JButton setBtn = new JButton(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/set.png"))); 
 		setBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -701,7 +701,7 @@ class TaskItem implements Runnable,Serializable{
 				if(beginbtn.getName().equals("suspend")) {
 					suspend();
 					beginbtn.setName("begin");
-					beginbtn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+					beginbtn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 				}
 				//隐藏itemchild
 				itemchild.setVisible(false);
@@ -729,7 +729,7 @@ class TaskItem implements Runnable,Serializable{
 		JPanel rightbtnpanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		rightbtnpanel.setPreferredSize(new Dimension(100,30));
 		//下拉按扭
-		JButton detailbtn = new JButton(new ImageIcon("./src/res/icon/pulldown.png"));	
+		JButton detailbtn = new JButton(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/pulldown.png")));	
 		detailbtn.setPreferredSize(new Dimension(30,30));
 		detailbtn.addActionListener(new ActionListener() {
 			@Override
@@ -756,7 +756,7 @@ class TaskItem implements Runnable,Serializable{
 		rightbtnpanel.add(detailbtn);
 		
 		//单个开始按钮
-		beginbtn = new JButton(new ImageIcon("./src/res/icon/begin.png"));
+		beginbtn = new JButton(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 		beginbtn.setPreferredSize(new Dimension(30,30));
 		beginbtn.setName("begin");
 		beginbtn.addActionListener(new ActionListener() {
@@ -768,11 +768,11 @@ class TaskItem implements Runnable,Serializable{
 				if(btn.getName().equals("begin")) {
 					startTask();
 					btn.setName("suspend");
-					btn.setIcon(new ImageIcon("./src/res/icon/suspend.png"));
+					btn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/suspend.png")));
 				}else {
 					suspend();
 					btn.setName("begin");
-					btn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+					btn.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/begin.png")));
 				}
 			}
 		});
@@ -809,7 +809,7 @@ class TaskItem implements Runnable,Serializable{
 		item.add(w_dpanel);
 		
 		//横线
-		JLabel panel_1=new JLabel(new ImageIcon("./src/res/icon/line.png"));
+		JLabel panel_1=new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("res/icon/line.png")));
 		panel_1.setPreferredSize(new Dimension(1000,5));
 		item.add(panel_1); 
 		
