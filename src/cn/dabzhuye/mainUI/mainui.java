@@ -273,10 +273,10 @@ class uiclass{
 							TaskItem item = arrayList.get(i);
 							item.setName(UiUtil.unicodeEncode(item.getName())); 
 						}
+						outstream = new FileOutputStream("./object.ser");
+						objoutstream = new ObjectOutputStream(outstream);
+						objoutstream.writeObject(arrayList);
 					}
-					outstream = new FileOutputStream("./object.ser");
-					objoutstream = new ObjectOutputStream(outstream);
-					objoutstream.writeObject(arrayList);
 				}catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -621,6 +621,13 @@ class TaskItem implements Runnable,Serializable{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
+						
+						//首先停止当前任务
+						if(beginbtn.getName().equals("suspend")) {
+							suspend();
+							beginbtn.setName("begin");
+							beginbtn.setIcon(new ImageIcon("./src/res/icon/begin.png"));
+						}
 						
 							//获取高度
 						int itemheight =  new Double(item.getPreferredSize().getHeight()).intValue();
