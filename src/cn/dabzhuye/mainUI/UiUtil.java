@@ -69,6 +69,7 @@ public class UiUtil {
 			connection.setDoInput(true);
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+			connection.setInstanceFollowRedirects(false);
 			
 			//获取输入流
 			InputStream inputStream = connection.getInputStream();
